@@ -7,6 +7,10 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController emailController =
+        TextEditingController(text: "msinggiadityaramadhan@gmail.com");
+    final TextEditingController passwordController =
+        TextEditingController(text: "12345678");
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -39,6 +43,7 @@ class Login extends StatelessWidget {
                     height: 29,
                   ),
                   TextField(
+                    controller: emailController,
                     style: GoogleFonts.poppins(),
                     decoration: InputDecoration(
                       filled: true,
@@ -67,6 +72,7 @@ class Login extends StatelessWidget {
                     height: 20,
                   ),
                   TextField(
+                    controller: passwordController,
                     style: GoogleFonts.poppins(),
                     decoration: InputDecoration(
                       filled: true,
@@ -108,7 +114,14 @@ class Login extends StatelessWidget {
                     height: 62,
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, "/home");
+                          if (emailController.text ==
+                                  "msinggiadityaramadhan@gmail.com" &&
+                              passwordController.text == "12345678") {
+                            Navigator.pushReplacementNamed(context, "/home");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Email or Password Incorrect")));
+                          }
                         },
                         child: Text(
                           "Login",
